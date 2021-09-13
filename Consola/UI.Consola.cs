@@ -9,11 +9,12 @@ using static System.Console;
 
 namespace TP2
 {
-    class UI
+    class Consola
     {
         static void Main(string[] args)
         {
-            new UI().Menu();
+           
+             new Consola().Menu();
         }
 
         public void Menu()
@@ -114,11 +115,14 @@ namespace TP2
                 Clear();
                 WriteLine("\n Ingreso una letra o no ingreso nada {0} \n",e);
             }
-            
+            /*En este caso no se como hacer para que entre en el catch cuando divido por 0, si declaro las variables como int entra
+            pero hace mal la operacion. Si las declaro como float / double hace bien la division, pero no entre en el catch
+             En el metodo "DivisionPorCero" en UnitTest se puede observar que el test no funciona al no tirar la excepcion */
+
             WriteLine("El resultado es {0}",resultado);
 
-            string devolver = (resul) ? $"Ha sido exitosa (Resultado {resultado})" : "no ha sido exitosa";
-            WriteLine($"La el resultado {devolver}");
+            string devolver = (resul) ? "Ha sido exitosa" : "no ha sido exitosa";
+            WriteLine($" Resultado {devolver}");
         }
 
         public void MuestraExcep()
@@ -138,7 +142,15 @@ namespace TP2
 
         public void OtraExcep()
         {
-
+            try
+            {
+                throw new CustomException();
+            }
+            catch (Exception ex)
+            {
+                WriteLine($"La Excepcion '{ex.Message}' personalizada ha sido capturada exitosamente");
+                
+            }
         }
     }
 
