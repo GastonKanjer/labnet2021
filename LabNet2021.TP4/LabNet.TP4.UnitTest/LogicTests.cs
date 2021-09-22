@@ -80,6 +80,6 @@ namespace LabNet.TP4.UnitTest
             Assert.AreEqual(2, model.Count);
         }
 */
-
+// No llegue a implementar este test por falta de tiempo
     }
 }
