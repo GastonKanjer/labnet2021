@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace LabNet.TP4.Logic
 {
-    public interface IABMLogic<T>
+    public interface IABMLogic<T, S>
     {
         List<T> GetAll();
         void Add(T obj);
         void Delete(int id);
         void Update(T obj);
+
+        T GetOne(S obj);
     }
 }

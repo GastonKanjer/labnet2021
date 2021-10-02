@@ -36,10 +36,10 @@ namespace LabNet.TP4.UnitTest
             CollectionAssert.AreEqual(primero, segundo);
 
         }
-
-        public class FakeShippersRepository : IABMLogic<Shippers>
+/*
+        public class FakeShippersRepository : IABMLogic<ShippersDto>
         {
-            public void Add(Shippers obj)
+            public void Add(ShippersDto obj)
             {
                 throw new NotImplementedException();
             }
@@ -64,7 +64,7 @@ namespace LabNet.TP4.UnitTest
             }
         }
 
-/*
+
         [TestMethod]
        public void IndexGetsAllShippers()
         {

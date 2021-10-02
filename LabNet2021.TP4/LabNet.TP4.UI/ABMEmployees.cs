@@ -14,7 +14,7 @@ namespace LabNet.TP4.UI
         public void Consulta()
         {
             EmployeesLogic employeesLogic = new EmployeesLogic();
-            foreach (Employees employee in employeesLogic.GetAll())
+            foreach (EmployeesDto employee in employeesLogic.GetAll())
             {
                 WriteLine($" {employee.FirstName} - {employee.LastName}");
             }
@@ -40,7 +40,7 @@ namespace LabNet.TP4.UI
                 WriteLine("Empleado agregado con exito!!");
 
 
-                shippersLogic.Add(new Employees
+                shippersLogic.Add(new EmployeesDto
                 {
                     EmployeeID = addID,
                     FirstName = nombre,
@@ -91,7 +91,7 @@ namespace LabNet.TP4.UI
                 apellido = ReadLine();
                 
                 
-                employeesLogic.Update(new Employees
+                employeesLogic.Update(new EmployeesDto
                 {
                     EmployeeID = searchID,
                     FirstName = nombre,

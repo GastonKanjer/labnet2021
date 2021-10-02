@@ -16,7 +16,7 @@ namespace LabNet.TP4.UI
         {
 
             ShippersLogic shippersLogic = new ShippersLogic();
-            foreach (Shippers shippers in shippersLogic.GetAll())
+            foreach (ShippersDto shippers in shippersLogic.GetAll())
             {
                 WriteLine($" {shippers.ShipperID} - {shippers.CompanyName} - {shippers.Phone}");
             }
@@ -40,7 +40,7 @@ namespace LabNet.TP4.UI
                 telefono = ReadLine();
 
 
-                shippersLogic.Add(new Shippers
+                shippersLogic.Add(new ShippersDto
                 {
                     ShipperID = addID,
                     CompanyName = nombreCompania,
@@ -93,7 +93,7 @@ namespace LabNet.TP4.UI
                 telefono = ReadLine();
 
 
-                shippersLogic.Update(new Shippers
+                shippersLogic.Update(new ShippersDto
                 {
                     ShipperID = searchID,
                     CompanyName = nombreCompania,

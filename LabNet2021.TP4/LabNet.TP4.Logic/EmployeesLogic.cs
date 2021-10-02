@@ -8,35 +8,68 @@ using System.Threading.Tasks;
 
 namespace LabNet.TP4.Logic
 {
-    public class EmployeesLogic : BaseLogic, IABMLogic<Employees>
+    public class EmployeesLogic : BaseLogic, IABMLogic<EmployeesDto, int>
     {
-        public List<Employees> GetAll()
+        public List<EmployeesDto> GetAll()
         {
-            return context.Employees.ToList();
+            var employees = (from e in context.Employees
+                            select new EmployeesDto
+                            {
+                                EmployeeID = e.EmployeeID,
+                                LastName = e.LastName,
+                                FirstName = e.FirstName
+
+                            }).ToList();
+            
+            return employees;
         }
-        public void Add(Employees newEmployee)
+
+        public EmployeesDto GetOne(int id)
         {
-            context.Employees.Add(newEmployee);
+            Employees emp = context.Employees.Find(id);
+            EmployeesDto employee = new EmployeesDto
+            {
+                EmployeeID = emp.EmployeeID,
+                LastName = emp.LastName,
+                FirstName = emp.FirstName
+            };
+
+            return employee;
+        }
+
+
+        public void Add(EmployeesDto newEmployee)
+        {
+            Employees employee = new Employees
+            {
+                EmployeeID = newEmployee.EmployeeID,
+                LastName = newEmployee.LastName,
+                FirstName = newEmployee.FirstName
+            };
+
+            context.Employees.Add(employee);
             context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var employeeToDelete = context.Employees.SingleOrDefault(s => s.EmployeeID == id);
+            var shipperToDelete = context.Shippers.SingleOrDefault(s => s.ShipperID == id);
 
-            context.Employees.Remove(employeeToDelete);
+            context.Shippers.Remove(shipperToDelete);
             context.SaveChanges();
         }
 
 
-        public void Update(Employees employee)
+        public void Update(EmployeesDto employee)
         {
             var employeeUpdate = context.Employees.Find(employee.EmployeeID);
 
-            employeeUpdate.FirstName = employee.FirstName;
             employeeUpdate.LastName = employee.LastName;
+            employeeUpdate.FirstName = employee.FirstName;
 
             context.SaveChanges();
         }
+
+
     }
 }

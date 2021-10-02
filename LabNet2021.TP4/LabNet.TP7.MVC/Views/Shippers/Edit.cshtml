@@ -1,0 +1,21 @@
+﻿@model LabNet.TP7.MVC.Models.ShippersView
+
+@{
+    ViewBag.Title = "Shippers Page";
+}
+
+<h1>Vista para editar</h1>
+
+@using (Html.BeginForm("Edit", "Shippers", FormMethod.Post))
+{
+    <label>ID</label> @Html.TextBoxFor(s => s.Id)
+    <br>
+    <br>
+    <label>Name</label> @Html.TextBoxFor(s => s.Name)
+    <br>
+    <br>
+    <label>Phone</label> @Html.TextBoxFor(s => s.Phone)
+    <br>
+    <br>
+    <input type="submit" class="btn btn-success" value="Guardar" />
+}

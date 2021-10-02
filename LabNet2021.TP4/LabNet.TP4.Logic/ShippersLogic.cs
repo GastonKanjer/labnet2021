@@ -8,16 +8,44 @@ using System.Threading.Tasks;
 
 namespace LabNet.TP4.Logic
 {
-    public class ShippersLogic: BaseLogic, IABMLogic<Shippers>
+    public class ShippersLogic : BaseLogic, IABMLogic<ShippersDto, int>
     {
-        public List<Shippers> GetAll()
+        public List<ShippersDto> GetAll()
         {
-            return context.Shippers.ToList();
+            var shippers = (from s in context.Shippers
+                            select new ShippersDto
+                            {
+                                ShipperID = s.ShipperID,
+                                CompanyName = s.CompanyName,
+                                Phone = s.Phone
+                            }).ToList();
+            return shippers;
         }
 
-        public void Add(Shippers newShipper)
+        public ShippersDto GetOne(int id)
         {
-            context.Shippers.Add(newShipper);
+            Shippers shipper = context.Shippers.Find(id);
+            ShippersDto ship = new ShippersDto
+            {
+                ShipperID = shipper.ShipperID,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone
+            };
+
+            return ship;
+        }
+
+
+        public void Add(ShippersDto newShipper)
+        {
+            Shippers shipper = new Shippers
+            {
+                ShipperID = newShipper.ShipperID,
+                CompanyName = newShipper.CompanyName,
+                Phone = newShipper.Phone
+            };
+
+            context.Shippers.Add(shipper);
             context.SaveChanges();
         }
 
@@ -30,7 +58,7 @@ namespace LabNet.TP4.Logic
         }
 
 
-        public void Update(Shippers shipper)
+        public void Update(ShippersDto shipper)
         {
             var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
 
@@ -39,6 +67,7 @@ namespace LabNet.TP4.Logic
 
             context.SaveChanges();
         }
+
 
     }
 }
