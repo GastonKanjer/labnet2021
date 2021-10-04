@@ -11,7 +11,7 @@
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Phone Number</th>
-            <th scole "col">Action</th>
+            <th scole "col">Action one</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,6 @@
     <td>@shipper.Name</td>
     <td>@shipper.Phone</td>
     <td>    @Html.ActionLink("Borrar", "Delete", new { id = shipper.Id }, new { onclick = "return confirm('Esta seguro de borrar?')" })</td>
-    <td>    @Html.ActionLink("Actualizar", "Edit", new {id =shipper.Id})</td>
 </tr>
         }
 
@@ -32,4 +31,7 @@
 
 <div>
     @Html.ActionLink("Insertar nueva compania", "Insert")
+</div>
+<div>
+    @Html.ActionLink("Actualizar", "Edit")
 </div>

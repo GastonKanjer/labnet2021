@@ -69,10 +69,17 @@ namespace LabNet.TP7.MVC.Controllers
         {
             try
             {
-                ShippersDto shipperEntity = new ShippersDto { CompanyName = shippersView.Name, Phone = shippersView.Phone };
 
-                logic.Update(shipperEntity);
+                ShippersDto updatedShipper = new ShippersDto
+                {
+                    ShipperID = shippersView.Id,
+                    CompanyName = shippersView.Name,
+                    Phone = shippersView.Phone
+                };
 
+                logic.Update(updatedShipper);
+                
+                
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

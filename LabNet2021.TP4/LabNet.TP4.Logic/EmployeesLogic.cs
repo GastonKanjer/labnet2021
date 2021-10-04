@@ -12,62 +12,103 @@ namespace LabNet.TP4.Logic
     {
         public List<EmployeesDto> GetAll()
         {
-            var employees = (from e in context.Employees
-                            select new EmployeesDto
-                            {
-                                EmployeeID = e.EmployeeID,
-                                LastName = e.LastName,
-                                FirstName = e.FirstName
+            try
+            {
+                var employees = (from e in context.Employees
+                                 select new EmployeesDto
+                                 {
+                                     EmployeeID = e.EmployeeID,
+                                     LastName = e.LastName,
+                                     FirstName = e.FirstName
 
-                            }).ToList();
+                                 }).ToList();
+
+                return employees;
+            }
             
-            return employees;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public EmployeesDto GetOne(int id)
         {
-            Employees emp = context.Employees.Find(id);
-            EmployeesDto employee = new EmployeesDto
+            try
             {
-                EmployeeID = emp.EmployeeID,
-                LastName = emp.LastName,
-                FirstName = emp.FirstName
-            };
+                Employees emp = context.Employees.Find(id);
+                EmployeesDto employee = new EmployeesDto
+                {
+                    EmployeeID = emp.EmployeeID,
+                    LastName = emp.LastName,
+                    FirstName = emp.FirstName
+                };
 
-            return employee;
+                return employee;
+            }
+            
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public void Add(EmployeesDto newEmployee)
         {
-            Employees employee = new Employees
+            try
             {
-                EmployeeID = newEmployee.EmployeeID,
-                LastName = newEmployee.LastName,
-                FirstName = newEmployee.FirstName
-            };
 
-            context.Employees.Add(employee);
-            context.SaveChanges();
+
+                Employees employee = new Employees
+                {
+                    EmployeeID = newEmployee.EmployeeID,
+                    LastName = newEmployee.LastName,
+                    FirstName = newEmployee.FirstName
+                };
+
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
+            
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Delete(int id)
         {
-            var shipperToDelete = context.Shippers.SingleOrDefault(s => s.ShipperID == id);
+            try
+            {
+                var shipperToDelete = context.Shippers.SingleOrDefault(s => s.ShipperID == id);
 
-            context.Shippers.Remove(shipperToDelete);
-            context.SaveChanges();
+                context.Shippers.Remove(shipperToDelete);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public void Update(EmployeesDto employee)
         {
-            var employeeUpdate = context.Employees.Find(employee.EmployeeID);
+            try
+            {
+                var employeeUpdate = context.Employees.Find(employee.EmployeeID);
 
-            employeeUpdate.LastName = employee.LastName;
-            employeeUpdate.FirstName = employee.FirstName;
+                employeeUpdate.LastName = employee.LastName;
+                employeeUpdate.FirstName = employee.FirstName;
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
