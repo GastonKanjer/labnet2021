@@ -89,7 +89,7 @@ namespace LabNet.TP4.Logic
         }
 
 
-        public void Update(ShippersDto shipper)
+       public void Update(ShippersDto shipper)
         {
             try
             {
@@ -99,6 +99,10 @@ namespace LabNet.TP4.Logic
                 shipperUpdate.Phone = shipper.Phone;
 
                 context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
