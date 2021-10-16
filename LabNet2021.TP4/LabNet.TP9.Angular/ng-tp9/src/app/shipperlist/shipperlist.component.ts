@@ -16,6 +16,7 @@ import { ShipperlistService } from './services/shipperlist.service';
 })
 export class ShipperlistComponent implements OnInit {
 
+  public shipperToUpdate: Shippers;
 
   public listShippers:Array<Shippers>;
   public form:FormGroup;
@@ -23,7 +24,7 @@ export class ShipperlistComponent implements OnInit {
 
 mId=0;
 mName='';
-mPhone=0;
+mPhone='';
 
 
 
@@ -41,7 +42,7 @@ mPhone=0;
 
 
 
-  constructor(private fb: FormBuilder, private modalService:NgbModal, private shippersService: ShipperlistService ) {}
+  constructor(private fb: FormBuilder, private modalService:NgbModal, private shippersService: ShipperlistService) {}
 
 
  // @ViewChild(MatTable)table!:MatTable<Shippers>;
@@ -62,9 +63,7 @@ mPhone=0;
     });
   }
 
-  onSubmit(): void {
-    //this.listObjectShippers.push(this.form.value);
-  }
+
 
   /*onClickLimpiar(): void {
     if (this.idCtrl) {
@@ -81,11 +80,16 @@ mPhone=0;
   }*/
 
 
-  borrarFila(ship: Shippers) {
+  borrarShipper(id: number) {
     if (confirm("¿Realmente quiere borrarlo?")) {
-      //this.listObjectShippers.splice(ship.id,1);
-     // this.table.renderRows();
-    }
+     // debugger;
+      this.shippersService.borrarShipper(id).subscribe(
+        ()=> this.ngOnInit(),
+        (error) => alert(`you cannot delete this record, ${error}`)
+      );
+      }
+      //this.ship= this
+
   }
 
   get f(){return this.form.controls;}
@@ -112,14 +116,28 @@ mPhone=0;
     });
   }
   abrirModal(content: any, ship:Shippers){
-  /* this.modalService.open(content,{ariaLabelledBy:'modal-basic-tittle'});
-   this.mId = ship.id;
-   this.mName= ship.name;
-   this.mPhone=ship.phone*/
+   this.modalService.open(content,{ariaLabelledBy:'modal-basic-tittle'});
+
 
 
   }
 
+
+
+
+
+
+  modificarShipper(){
+    this.shipperToUpdate.ShipperID = this.f.ShipperID.value;
+    this.shipperToUpdate.CompanyName = this.f.CompanyName.value;
+    this.shipperToUpdate.Phone = this.f.phoneNumber.value;
+
+    this.shippersService.modificarShipper(this.shipperToUpdate).subscribe(
+      (error) => alert(`An update to a record failed, ${error}`)
+    );
+
+
+  }
 
 }
 

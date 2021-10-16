@@ -10,15 +10,26 @@ import { environment } from 'src/environments/environment';
 export class ShipperlistService {
 
   endpoint: string = 'ShippersApi';
+  url = environment.apiShippers + this.endpoint;
   constructor(private http: HttpClient) {}
 
   public crearShipper(shipperRequest: Shippers): Observable<any> {
-    let url = environment.apiShippers + this.endpoint;
-    return this, this.http.post(url, shipperRequest);
+    return this, this.http.post(this.url, shipperRequest);
   }
 
   public obtenerShippers(): Observable<Array<Shippers>> {
-    let url = environment.apiShippers + this.endpoint;
-    return this.http.get<Array<Shippers>>(url);
+
+    return this.http.get<Array<Shippers>>(this.url);
+  }
+
+  public borrarShipper(id){
+    //debugger;
+    let url =  environment.apiShippers + this.endpoint;
+    return this.http.delete<any>(this.url+id)
+  }
+
+  public modificarShipper(shipperRequest:Shippers):Observable<any>{
+    return this.http.put<any>(this.url + shipperRequest.ShipperID, shipperRequest)
+
   }
 }

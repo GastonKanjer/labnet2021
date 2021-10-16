@@ -77,7 +77,7 @@ namespace LabNet.TP4.Logic
         {
             try
             {
-                var shipperToDelete = context.Shippers.SingleOrDefault(s => s.ShipperID == id);
+                var shipperToDelete = context.Shippers.Single(s => s.ShipperID == id);
 
                 context.Shippers.Remove(shipperToDelete);
                 context.SaveChanges();
