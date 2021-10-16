@@ -100,6 +100,10 @@ namespace LabNet.TP4.Logic
 
                 context.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

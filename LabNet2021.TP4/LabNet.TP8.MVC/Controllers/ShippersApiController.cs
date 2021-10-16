@@ -16,10 +16,9 @@ namespace LabNet.TP8.MVC.Controllers
         // GET: ShippersApi
 
         [HttpGet]
-        public IHttpActionResult Get()
+        public List<ShippersResponse> Get()
         {
-            try
-            {
+
                 List<ShippersResponse> shippersRespon;
                 List<ShippersDto> shippers = logic.GetAll();
 
@@ -31,13 +30,7 @@ namespace LabNet.TP8.MVC.Controllers
 
                 }).ToList();
 
-                return Ok(shippersRespon);
-            }
-            catch (Exception e)
-            {
-
-                return InternalServerError(e);
-            }
+                return shippersRespon;
         }
 
         [HttpGet]
